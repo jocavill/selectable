@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Paddons": "src/"
+      "Paddons\\": "src/"
     }
   }
 }
