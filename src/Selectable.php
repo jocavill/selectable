@@ -2,7 +2,13 @@
 
 trait Selectable
 {
-    public static function get_selection($empty_item_text = 'Please select', $excludes = [], $collection = null)
+    /**
+     * @param mixed $empty_item. Set to false for none
+     * @param array $excludes
+     * @param null $collection
+     * @return array
+     */
+    public static function get_selection($empty_item = 'Please select', $excludes = [], $collection = null)
     {
         $model = new self();
 
@@ -11,7 +17,14 @@ trait Selectable
         $selection = [];
         $records = $collection ?: $model->all();
 
-        if ($empty_item_text) $selection[0] = $empty_item_text;
+        if ($empty_item) {
+
+            if (is_array($empty_item)) {
+                $selection[key($empty_item)] = value($empty_item);
+            } else {
+                $selection[0] = $empty_item;
+            }
+        }
 
         foreach ($records as $record) {
             if(in_array($record->$primaryKey, $excludes)) continue;
