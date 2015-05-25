@@ -18,9 +18,8 @@ trait Selectable
         $records = $collection ?: $model->all();
 
         if ($empty_item) {
-
             if (is_array($empty_item)) {
-                $selection[key($empty_item)] = value($empty_item);
+                $selection[key($empty_item)] = current($empty_item);
             } else {
                 $selection[0] = $empty_item;
             }
