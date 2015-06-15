@@ -15,7 +15,7 @@ trait Selectable
         $primaryKey = $model->primaryKey;
         $label_field = $model->labelField ?: 'name';
         $selection = [];
-        $records = $collection ?: $model->all();
+        $records = $collection !== null ? $collection : $model->all();
 
         if ($empty_item) {
             if (is_array($empty_item)) {
